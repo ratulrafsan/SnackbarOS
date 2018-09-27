@@ -1,0 +1,14 @@
+//
+// Created by ratulrafsan on 9/23/18.
+//
+
+#ifndef SNACKBAR_MAGICADDR_H
+#define SNACKBAR_MAGICADDR_H
+
+#endif //SNACKBAR_MAGICADDR_H
+
+#define VGA_3_FRAME_BUFFER_START 0x000B8000
+#define VGA_CURSOR_HIGH_BYTE     14
+#define VGA_CURSOR_LOW_BYTE      15
+#define VGA_CURSOR_ATTRIB_PORT   0x3D4
+#define VGA_CURSOR_DATA_PORT     0x3D5
