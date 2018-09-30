@@ -21,4 +21,9 @@ align 4
 loader:
     mov esp, kernel_stack + KERNEL_STACK_SIZE ; point esp to the start of the stack
     call k_main
-    hlt
+
+    ;read cr0 register for debug purpese
+    mov eax, cr0
+
+hang:
+    jmp hang

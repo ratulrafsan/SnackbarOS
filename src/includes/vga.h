@@ -2,14 +2,14 @@
 // Created by ratulrafsan on 9/23/18.
 //
 
-#ifndef SNACKBAR_KIO_H
-#define SNACKBAR_KIO_H
+#ifndef SNACKBAR_VGA_H
+#define SNACKBAR_VGA_H
 
-#endif //SNACKBAR_KIO_H
-
-#include "clib/ministdint.h"
+#include <stdint.h>
+#include <stdbool.h>
 
 // Color definitions
+
 #define VGA_COLOR_BLACK 0
 #define VGA_COLORBLUE 1
 #define VGA_COLOR_GREEN 2
@@ -27,14 +27,15 @@
 #define VGA_COLOR_LIGHT_BROWN 14
 #define VGA_COLOR_WHITE 15
 
+#define VGA_TUI_FRAME_BUFFER_START 0x000B8000
+#define VGA_CURSOR_HIGH_BYTE     14
+#define VGA_CURSOR_LOW_BYTE      15
+#define VGA_CURSOR_ATTRIB_PORT   0x3D4
+#define VGA_CURSOR_DATA_PORT     0x3D5
 
-void        outb(uint16_t port, uint8_t data);
-uint8_t     inb(uint16_t port);
-uint16_t    inw(uint16_t port);
-void        k_write_cell(char, uint8_t fg_color, uint8_t bg_color);
-void        k_clear_screen();
-void        k_putchar(char c);
-void        k_putserr(char* c);
-void        k_puts(char* str);
-void        k_puts_color(char* c, uint8_t fg_color, uint8_t bg_color);
-void        move_cursor();
+void        vga_write_cell(char, uint8_t fg_color, uint8_t bg_color);
+void        vga_clear_screen();
+void        vga_move_cursor();
+void        vga_set_blink_mode(bool blink);
+
+#endif //SNACKBAR_VGA_H
