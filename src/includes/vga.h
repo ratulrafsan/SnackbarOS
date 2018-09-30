@@ -36,6 +36,6 @@
 void        vga_write_cell(char, uint8_t fg_color, uint8_t bg_color);
 void        vga_clear_screen();
 void        vga_move_cursor();
-void        vga_set_blink_mode(bool blink);
+void        vga_set_blink_mode(bool blink); //TODO: IMPLEMENT vga blinking control function
 
 #endif //SNACKBAR_VGA_H

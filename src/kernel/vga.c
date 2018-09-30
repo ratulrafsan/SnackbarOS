@@ -3,7 +3,6 @@
 //
 
 #include <stdint.h>
-#include <magicaddr.h>
 #include <vga.h>
 #include <common.h>
 
@@ -24,7 +23,7 @@ void vga_write_cell(char c, uint8_t fg_color, uint8_t bg_color){
     }
     else {
         //else its just a usual character
-        uint8_t attribByte = (bg_color << 4) | (fg_color & 0x0F);
+        uint8_t attribByte = (uint8_t) ((bg_color << 4) | (fg_color & 0x0F));
         uint16_t colorData = attribByte << 8;
 
         writePos = fb + (cur_y * 80 + cur_x);
@@ -45,7 +44,7 @@ void vga_set_blink_mode(bool blink){
 
 void vga_clear_screen(){
     uint8_t colorData = (VGA_COLOR_BLACK << 4) | (VGA_COLOR_WHITE & 0x0F);
-    uint16_t blank = 0x20 | (colorData << 8); // 0x20 is 'Space' in ASCII
+    uint16_t blank = (uint8_t)0x20 | (colorData << 8); // 0x20 is 'Space' in ASCII
     for(uint16_t i = 0; i < 80*25; i++){
         fb[i] = blank;
     }
@@ -57,7 +56,7 @@ void vga_clear_screen(){
 
 void vga_move_cursor(){
     //Index = [(y * width) + x]
-    uint16_t cursorLocation = cur_y * 80 + cur_x;
+    uint16_t cursorLocation = cur_y * (uint8_t )80 + cur_x;
 
     outb(VGA_CURSOR_ATTRIB_PORT, VGA_CURSOR_HIGH_BYTE); // Tell the VGA that we will write attribute data on high 8 bytes
     outb(VGA_CURSOR_DATA_PORT, cursorLocation >> 8);    // Send the actual data

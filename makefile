@@ -7,7 +7,8 @@ CC = $(BIN_DIR)/$(ARCH)-gcc
 LINKER = $(BIN_DIR)/$(ARCH)-ld
 AS = nasm
 
-CFLAGS = -ffreestanding -I $(ROOT_INCLUDE_DIR) -I $(LIBK_INCLUDE_DIR) -Wall -Wextra -Werror -c
+CFLAGS = -ffreestanding -Wall -Wextra -Werror -c
+CFLAGS += -I $(ROOT_INCLUDE_DIR) -I $(LIBK_INCLUDE_DIR) -I $(LIBC_INCLUDE_DIR)
 LDFLAGS = -T linker.ld
 ASFLAGS = -f elf32
 
@@ -16,6 +17,8 @@ SRC_DIR = src
 
 ROOT_INCLUDE_DIR = $(SRC_DIR)/includes/
 LIBK_INCLUDE_DIR = $(ROOT_INCLUDE_DIR)libk/
+LIBC_INCLUDE_DIR = $(ROOT_INCLUDE_DIR)libc/
+
 #For debug purpose. Prints out the content of a variable. USAGE: make print-VARNAME
 #e.g: make print-C_FILES
 print-%: ; @echo $* = $($*)

@@ -9,11 +9,11 @@ been wanting to work on raspberry pi baremetal for a while. No promises.
 ### Prerequisites
 * [Netwide Assembler](https://www.nasm.us/)
 * genisoimage (part of [cdrtools](https://www.archlinux.org/packages/community/x86_64/cdrtools/) on Arch-linux)
-* Bochs (you can use qemu, but you'll have to configure it yourself)
+* [Bochs](http://bochs.sourceforge.net/) (you can use qemu, but you'll have to configure it yourself)
 * Masochist mindset
 
 ### Cross-compiler
-First and foremost, you will need a cross-compiler. You can find the build instruction for it on [osdev](https://wiki.osdev.org/GCC_Cross-Compiler)
+First and foremost, you will need a cross-compiler. You can find the build instructions for it on [osdev](https://wiki.osdev.org/GCC_Cross-Compiler)
 (grab some popcorn and a few gallon of soda cuz compiling a cross-compiler is one hell of a screen time journey)
 
 <sup><sup><sup>or you can just download an existing build & show some mercy to whatever hair left on your head </sup></sup></sup>
@@ -38,7 +38,7 @@ You can find the OS iso, kernel elf file and all object files in the ```build```
 
 **_Be aware, ```make clean``` will delete the build directory_**
 ### Contributing
-If you value your sanity, don't. Look for better hobbies. If not then I guess we will meet in an psychiatric ward someday ~
+If you value your sanity, don't. Look for better hobbies. If not then I guess we will meet in a psychiatric ward someday ~
 
 ## Authors
 * Planning: Me.
@@ -53,4 +53,5 @@ If you value your sanity, don't. Look for better hobbies. If not then I guess we
 * 27/9/18: A messy hello world OS (newlines, tabs, colored text supported)
 * 28/9/18: An attempt to properly structure the project. Moved ```outb```, ```inw```, ```inb``` to ```common.h```
 * 29/9/18: Finally setup a i686-elf cross compiler & improve the makefile, start using gcc ```stdint.h``` instead of makeshift ```ministdint.h```
-* 30/9/18: A proper README with some build instructions.
+* 30/9/18: A proper README with some build instructions. More rearrangements. Moved kernel level I/O functions to ```kstdio.h```,
+separated VGA methods and declarations to ```vga.h```, starting work on standard ```string.h```
