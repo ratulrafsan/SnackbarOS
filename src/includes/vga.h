@@ -27,15 +27,17 @@
 #define VGA_COLOR_LIGHT_BROWN 14
 #define VGA_COLOR_WHITE 15
 
-#define VGA_TUI_FRAME_BUFFER_START 0x000B8000
-#define VGA_CURSOR_HIGH_BYTE     14
-#define VGA_CURSOR_LOW_BYTE      15
-#define VGA_CURSOR_ATTRIB_PORT   0x3D4
-#define VGA_CURSOR_DATA_PORT     0x3D5
+#define VGA_TUI_FRAME_BUFFER_START  0x000B8000
+#define VGA_CURSOR_HIGH_BYTE        14
+#define VGA_CURSOR_LOW_BYTE         15
+#define VGA_CURSOR_ATTRIB_PORT      0x3D4
+#define VGA_CURSOR_DATA_PORT        0x3D5
+#define VGA_ISR_PORT                0x3DA
+#define VGA_ATTRIB_DATA_REG_PORT    0x3C0
+#define VGA_ATTRIB_DATA_READ_PORT   0x3C1
 
 void        vga_write_cell(char, uint8_t fg_color, uint8_t bg_color);
 void        vga_clear_screen();
-void        vga_move_cursor();
 void        vga_set_blink_mode(bool blink); //TODO: IMPLEMENT vga blinking control function
 
 #endif //SNACKBAR_VGA_H

@@ -55,3 +55,6 @@ If you value your sanity, don't. Look for better hobbies. If not then I guess we
 * 29/9/18: Finally setup a i686-elf cross compiler & improve the makefile, start using gcc ```stdint.h``` instead of makeshift ```ministdint.h```
 * 30/9/18: A proper README with some build instructions. More rearrangements. Moved kernel level I/O functions to ```kstdio.h```,
 separated VGA methods and declarations to ```vga.h```, starting work on standard ```string.h```
+* 1/10/18: Implemented ```memcpy```, ```memcmp```
+* 2/10/18: Implemented ```itoa```
+* 6/10/18: Implemented serial output interface. Added simple `serial_printf` for formatted debug printing 

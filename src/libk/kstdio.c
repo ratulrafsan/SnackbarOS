@@ -8,15 +8,17 @@
 
 #include <vga.h>
 
-/*
- * Given a character, k_putchar function prints the character in white with black background.
+/**
+ * Print character @param c to screen.
+ * @param c  : Character to print
  */
 void k_putch(char c){
     vga_write_cell(c, VGA_COLOR_WHITE, VGA_COLOR_BLACK);
 }
 
-/*
- *  Given a pointer to string, this function will print the string upto '\0' & add a '\n' at the end
+/**
+ * Prints string pointed by @param ptr_str to screen.
+ * @param ptr_str   : Pointer to string buffer to read from.
  */
 void k_puts(char* ptr_str){
     while(*ptr_str != '\0'){
@@ -25,9 +27,13 @@ void k_puts(char* ptr_str){
     k_putch('\n');
 }
 
-/*
- * Given a string and foreground & background color this function prints the string upto '\0' using the given
- * color and adds a '\n' at the end
+
+/**
+ * Prints @param ptr_str with foreground color as @param foreground_color & background color as @param background_color
+ * It also prints a new line character ('\n') at the end.
+ * @param ptr_str           : Pointer to string buffer to read from
+ * @param foreground_color
+ * @param background_color
  */
 void k_puts_color(char* ptr_str, uint8_t foreground_color, uint8_t background_color){
     while(*ptr_str != '\0'){
@@ -35,8 +41,9 @@ void k_puts_color(char* ptr_str, uint8_t foreground_color, uint8_t background_co
     }
 }
 
-/*
- *  Given a string, k_puts_err will print the string in white with red background
+/**
+ * Prints @param ptr_str with white foreground and red background color
+ * @param ptr_str : Pointer to string buffer to read from.
  */
 void k_puts_err(char* ptr_str){
     k_puts_color(ptr_str, VGA_COLOR_WHITE, VGA_COLOR_RED);
