@@ -20,6 +20,12 @@ align 4
 
 loader:
     mov esp, kernel_stack + KERNEL_STACK_SIZE ; point esp to the start of the stack
+
+    ; push multiboot info address & magic number to stack
+    push eax
+    push ebx
+
+    ;jmp hang
     call k_main
 
 hang:

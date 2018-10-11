@@ -5,4 +5,4 @@ set(CMAKE_C_STANDARD 99)
 include_directories(src/includes/ src/includes/libk src/includes/libc)
 add_executable(snackbar src/kernel/kmain.c src/includes/vga.h src/kernel/vga.c src/includes/common.h
         src/includes/libk/kstdio.h src/libk/kstdio.c src/libc/string.c src/includes/libc/string.h
-        src/kernel/serial.c src/includes/serial.h)
+        src/kernel/serial.c src/includes/serial.h src/includes/grub/multiboot.h)
