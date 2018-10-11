@@ -35,10 +35,8 @@ $(BUILD_DIR)/%_c.o: $(SRC_DIR)/%.c
 $(BUILD_DIR)/%_s.o: $(SRC_DIR)/%.s
 	$(AS) $(ASFLAGS) $< -o $@
 
-C_FILES = $(wildcard $(SRC_DIR)/**/*.c)
-C_FILES += $(wildcard $(SRC_DIR)/*.c)
-ASM_FILES = $(wildcard $(SRC_DIR)/**/*.s)
-ASM_FILES += $(wildcard $(SRC_DIR)/*.s)
+C_FILES := $(shell find $(SRC_DIR) -name '*.c')
+ASM_FILES := $(shell find $(SRC_DIR) -name '*.s')
 OBJ_FILES = $(C_FILES:$(SRC_DIR)/%.c=$(BUILD_DIR)/%_c.o)
 OBJ_FILES += $(ASM_FILES:$(SRC_DIR)/%.s=$(BUILD_DIR)/%_s.o)
 
