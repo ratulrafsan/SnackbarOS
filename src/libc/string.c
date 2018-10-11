@@ -46,33 +46,57 @@ void* memset(void* ptr_dest, int val, size_t len){
 }
 
 /**
- *  Copies n bytes from ptr_src to ptr_dest
+ *  Copies len bytes from ptr_src to ptr_dest. Doesn't care about overlapping.
  * @param ptr_dest : Where to copy to
  * @param ptr_src  : Where to copy from
  * @param len      : How many bytes to copy
  * @return ptr_dest
  */
 
-void* memcpy(void* ptr_dest, const void* ptr_src, size_t n){
+void* memcpy(void* ptr_dest, const void* ptr_src, size_t len){
     char* dest = ptr_dest;
     const char* src = ptr_src;
 
-    while(n--){
+    while(len--){
         *dest++ = *src++;
     }
 
-    return dest;
+    return ptr_dest;
 }
 
+/**
+ * Copies n bytes from ptr_src to ptr_dest. Overlapping aware.
+ * @param ptr_dest  : Where to copy to
+ * @param ptr_src   : Where to copy from
+ * @param len       : How many bytes to copy
+ * @return ptr_dest
+ */
 void* memmove(void* ptr_dest, const void* ptr_src, size_t len){
-    //char* dest = ptr_dest;
-    //const char* src = ptr_src;
-    (void)ptr_dest;
-    (void)ptr_src;
-    (void)len;
-    //TODO: implement it
+    /* If the source & destination overlaps, we need to be careful not to
+     * overwrite the data pointed by ptr_dest.
+     * I.E.
+     *        ptr_src = ..ssssssssssssssssss.......
+     *                         ^                ^
+     *                         |                |
+     *       src_dest = .......dddddddddddddddddd...
+     *
+     * In such cases, we simply have to copy the source data to destination data backwards
+     */
 
-    return NULL;
+    // If ptr_dest points to an address lower than ptr_src then they don't overlap
+    if(ptr_dest < ptr_src){
+        return memcpy(ptr_dest, ptr_src, len);
+    } else{
+        // They overlap, so get the last address of both ptr_dest & ptr_src
+        char* dest_end = ptr_dest + len;
+        char* src_end = (char*)ptr_src + len;
+
+        while(len--){
+            *--dest_end = *--src_end;
+        }
+    }
+
+    return ptr_dest;
 }
 
 /**
@@ -83,7 +107,7 @@ void* memmove(void* ptr_dest, const void* ptr_src, size_t len){
  * @param base  : Base of the target numeric value
  */
 void itoa(char *buff, unsigned long int n, int base) {
-    unsigned long int tmp = n;
+    unsigned long int tmp;
     int i = 0;
 
     do {

@@ -3,6 +3,7 @@
 #include <kstdio.h>
 #include <common.h>
 #include <serial.h>
+#include <string.h>
 
 int k_main(){
     vga_clear_screen();
@@ -13,6 +14,7 @@ int k_main(){
             10, 20, 10+20, "and finally in hex..", 10, 20, 10+20);
     vga_set_blink_mode(false);// DOESN'T WORK
     k_puts_color("BLK TXT\n", VGA_COLOR_RED, VGA_COLOR_WHITE);
+
 
     return 0x0DEADBABA;
 }
