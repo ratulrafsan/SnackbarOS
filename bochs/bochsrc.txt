@@ -6,6 +6,7 @@
     log:             bochs/bochslog.txt
     clock:           sync=realtime
     cpu:             count=1, ips=1000000
-    mouse: 	     enabled=0
-    com1:        enabled=1, mode=file, dev=com1.txt
-    #display_library: x, options="gui_debug"
+    mouse: 	         enabled=0
+    magic_break:     enabled=1
+    com1:            enabled=1, mode=file, dev=com1.txt
+    #display_library:x, options="gui_debug"

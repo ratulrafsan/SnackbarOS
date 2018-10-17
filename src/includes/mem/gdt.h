@@ -27,10 +27,10 @@
 #define DESCRIPTOR_CDS              0b0001 // CDS = Code Data Stack
 
 // Segment flags
-#define ONE_BYTE_16_BIT             0b0000 // 16 bit mode with 1 byte granularity
-#define ONE_BYTE_32_BIT             0b0100 // 32 bit mode with 1 byte granularity
-#define FOUR_KB_16_BIT              0b1000 // 16 bit mode with 4KB granularity
-#define FOUR_KB_32_BIT              0b1100 // 32 bit mode with 4KB granularity
+#define FLAG_ONE_BYTE_16_BIT        0b0000 // 16 bit mode with 1 byte granularity
+#define FLAG_ONE_BYTE_32_BIT        0b0100 // 32 bit mode with 1 byte granularity
+#define FLAG_FOUR_KB_16_BIT         0b1000 // 16 bit mode with 4KB granularity
+#define FLAG_FOUR_KB_32_BIT         0b1100 // 32 bit mode with 4KB granularity
 
 // Common access nibble definitions
 #define ACCESS_BYTE_KERNEL_CODE_SEGMENT     ((DESCRIPTOR_CDS | DPL_KERNEL) << 4) | CODE_EXECUTE_READ
@@ -43,12 +43,11 @@ struct gdt_ptr_struct{
     uint32_t base; // address of first gdt entry
 }__attribute__((packed));
 
-// lim_low + base_low + base_mid + type + s + priv + present
 struct gdt_entry_struct{
-    unsigned int lim_low       : 16; // Low 16 bits of segment limit
+    unsigned int lim_low        : 16; // Low 16 bits of segment limit
 
-    unsigned int base_low      : 16; // Low 16 bits of segment base address
-    unsigned int base_mid     :  8; // Middle 8 bits of segment base address
+    unsigned int base_low       : 16; // Low 16 bits of segment base address
+    unsigned int base_mid       :  8; // Middle 8 bits of segment base address
 
     //Access byte
     unsigned int type           :  4; // Segment type
@@ -57,28 +56,26 @@ struct gdt_entry_struct{
     unsigned int present        :  1; // Present bit. Must be 1 for all valid sectors
 
     //Flag/granularity byte
-    unsigned int lim_high      :  4; // High 4 bits of segment limit
+    unsigned int lim_high       :  4; // High 4 bits of segment limit
 
     unsigned int available      :  1; // Unused bit. Available for software use
     unsigned int reserved       :  1; // Reserved bit. Set it to 0
     unsigned int segment_size   :  1; // 0 = 16 bit segment, 1 = 32 bit segment
     unsigned int granularity    :  1; // Limit scaled by 4K when set.
 
-    unsigned int base_high     :  8; // High 8 bits of segment base address
+    unsigned int base_high      :  8; // High 8 bits of segment base address
 
 }__attribute__((packed));
 
 typedef struct gdt_entry_struct gdt_entry_t;
 typedef struct gdt_ptr_struct gdt_ptr_t;
 
-gdt_entry_t gdt[3];
 gdt_ptr_t gdt_ptr;
+gdt_entry_t gdt[6];
 
-void gdt_set_gate(int num, uint32_t base, uint32_t limit, unsigned int type,
-        unsigned int access, unsigned int flags);
+extern void gdt_flush(uint32_t gdt_ptr); // Definition in gdt.s
 
-
-
-
+void gdt_set_gate(int num, uint32_t base, uint32_t limit, unsigned int access, unsigned int flags);
+void gdt_install();
 
 #endif //SNACKBAR_GDT_H

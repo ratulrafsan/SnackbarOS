@@ -36,21 +36,4 @@ uint16_t inw(uint16_t port){
     return data;
 }
 
-/**
- * Simple function to dump a struct to serial output
- * See http://stackoverflow.com/questions/6687500/how-do-i-dump-and-arbitary-struct-in-c
- * @param com_port Port to write to
- * @param ptr_struct Pointer to the struct you want to dump
- * @param size Size of the struct
- */
-void serial_struct_dump(uint16_t com_port, void* ptr_struct, unsigned long size){
-    const unsigned char* const px = (unsigned char*)ptr_struct;
-    for(unsigned int i = 0; i < size; i++){
-        if( i % (sizeof(int) * 8) == 0){
-            serial_printf(com_port, "\n %b ", i);
-        }else if( i % 4 == 0){
-            serial_printf(com_port, " ");
-        }
-        serial_printf(com_port, "%b", px[i]);
-    }
-}
+

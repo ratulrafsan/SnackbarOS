@@ -51,10 +51,12 @@ If you value your sanity, don't. Look for better hobbies. If not then I guess we
 
 ## Log
 * 27/9/18: A messy hello world OS (newlines, tabs, colored text supported)
-* 28/9/18: An attempt to properly structure the project. Moved ```outb```, ```inw```, ```inb``` to ```common.h```
+* 28/9/18: An attempt to properly structure the project. Moved ```outb```, ```inw```, ```
+inb``` to ```common.h```
 * 29/9/18: Finally setup a i686-elf cross compiler & improve the makefile, start using gcc ```stdint.h``` instead of makeshift ```ministdint.h```
 * 30/9/18: A proper README with some build instructions. More rearrangements. Moved kernel level I/O functions to ```kstdio.h```,
 separated VGA methods and declarations to ```vga.h```, starting work on standard ```string.h```
 * 1/10/18: Implemented ```memcpy```, ```memcmp```
 * 2/10/18: Implemented ```itoa```
 * 6/10/18: Implemented serial output interface. Added simple `serial_printf` for formatted debug printing 
+* 18/10/18: GDT implemented, finally. Next up, IDT & keyboard...yay :D 

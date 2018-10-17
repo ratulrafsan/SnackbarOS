@@ -13,11 +13,19 @@ int k_main(multiboot_info_t* multiboot_info, unsigned int magic){
     serial_printf(SERIAL_COM1_BASE, "Multiboot info address %x\n", multiboot_info);
     serial_printf(SERIAL_COM1_BASE, "Magic number  %x\n", magic);
 
-    gdt_set_gate(0, 0, 0xfffff, CODE_EXECUTE_READ, ACCESS_BYTE_KERNEL_CODE_SEGMENT, FOUR_KB_32_BIT);
-
-    serial_struct_dump(SERIAL_COM1_BASE, gdt, sizeof(gdt_entry_t));
-
     vga_clear_screen();
+
+    gdt_install();
+    /* Good heavens, it finally works :') At times like this, you realize that writing a good enough OS takes a lot of time.
+     * Global Descriptor Table (base=0x0000000000103000, limit=39):
+      GDT[0x00]=??? descriptor hi=0x00000000, lo=0x00000000
+      GDT[0x01]=Code segment, base=0x00000000, limit=0xffffffff, Execute/Read, Non-Conforming, Accessed, 32-bit
+      GDT[0x02]=Data segment, base=0x00000000, limit=0xffffffff, Read/Write, Accessed
+      GDT[0x03]=Code segment, base=0x00000000, limit=0xffffffff, Execute/Read, Non-Conforming, 32-bit
+      GDT[0x04]=Data segment, base=0x00000000, limit=0xffffffff, Read/Write
+     */
+
+    //asm("xchg %bx, %bx"); // bochs magic breakpoint
 
     return 0x0DEADBABA;
 }
